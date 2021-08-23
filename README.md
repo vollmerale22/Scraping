@@ -24,4 +24,4 @@ For each UID in the list, it is iterated through the Scrapy Spider.
 Since the website will notice the frequent site visits soon, one can either implement rotating proxies to disguise the IP Adress or delay the download speed. 
 
 *Note:*
-Testing.py is another method for doing this scraping task. Here we work with Selenium and Beautiful Soup. A Chrom Driver is used to open every request, scrape the data, append to the csv file and close the website. The items are also slected with the CSS Selector.
+Selenium.py is another method for doing this scraping task. Here we work with Selenium and Beautiful Soup. A Chrom Driver is used to open every request, scrape the data, append to the csv file and close the website. The items are also slected with the CSS Selector.
