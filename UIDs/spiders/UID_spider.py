@@ -7,17 +7,10 @@ Created on Wed Aug  4 13:17:02 2021
 
 import scrapy
 from UIDs.items import UidsItem
-from scrapy.settings import Settings
 import pandas as pd
 from scrapy.spiders import CrawlSpider, Rule
-from scrapy.linkextractors import LinkExtractor
 from scrapy.crawler import CrawlerProcess
-from scrapy.crawler import CrawlerRunner
-import scrapy.crawler as crawler
-from scrapy import Request
 import time
-from multiprocessing import Process, Queue
-from twisted.internet import reactor
 
           
 
