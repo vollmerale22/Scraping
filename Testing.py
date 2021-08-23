@@ -3,6 +3,8 @@
 """
 
 @author: AV
+
+Method using Selenium and BeautifulSoup
 """
 import scrapy
 from bs4 import BeautifulSoup
@@ -18,7 +20,7 @@ import time
 from random import randint
 
    
-# Document for first 100 UIDs
+# Document for UIDs
 uids = pd.read_excel(r'C:\Users\vollm\Desktop\Random Test.xlsx', index_col=None)
 contents = []
 
@@ -90,105 +92,4 @@ df = pd.DataFrame(contents)
        
         
         
-df.to_csv(r'C:\Users\vollm\Desktop\Random Results.csv')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Lists
-firstclass=[] #List to store the first class
-secondclass=[] #List to store the second class
-thirdclass=[] #List to store the third class
-
-df = pd.DataFrame()
-
-
-
-# Method by classes
-
-for urls in range(len(uids)):
-   
-        url = 'https://www.uid.admin.ch/Detail.aspx?uid_id=CHE-100.159.411'#+uids.loc[urls][0]
-        driver = webdriver.Chrome(executable_path=r'C:\Users\vollm\Downloads\chromedriver.exe')
-        driver.get(url)
-        time.sleep(10)
-        page= requests.get(url)
-        content = driver.page_source.encode('utf-8').strip()
-        soup = BeautifulSoup(page.text,'html.parser') #content,'html.parser')
-        text = soup.get_text()
-                
-         
-        first_class= soup.find_all("div",{"class": "col-sm-4"})
-        firstdivs = []
-        for div in first_class:
-            firstdivs.append(div.text)
-       
-        #First class includes UID, status,HR status, Country , Municipality, 
-        #Municipality no,Last validation, RC status, VAT status, VAT number, VAT group member, Legal form, PO box number, UID headquarter
-        
-        second_class= soup.find_all("div", {"class": "col-sm-10"})
-       # Second class includes Name,old names, additional name, translation,c/o, Street/No., Complement, ZIP/Town, ZIP/Town of PO box,
-        seconddivs=[]
-        for div in second_class:
-            seconddivs.append(div.text)
-         
-        third_class= soup.find_all("div", {"class": "col-sm-3"})
-        thirddivs = []
-        # Third class includes EGID, link, Commerce reference number
-        for div in third_class:
-           thirddivs.append(div.text)    
-        
-        dataframe_a= pd.DataFrame({'a': pd.Series(firstdivs)})
-        dataframe_a = dataframe_a.transpose()
-
-        dataframe_b= pd.DataFrame({'a': pd.Series(seconddivs)})
-        dataframe_b = dataframe_b.transpose()
-
-        dataframe_c= pd.DataFrame({'a': pd.Series(thirddivs)})
-        dataframe_c = dataframe_c.transpose()
-
-        merged = dataframe_a.merge(dataframe_b, left_index = True, right_index = True)
-        merged = merged.merge(dataframe_c, right_index = True, left_index = True)
-        
-        driver.quit()
-        
-        
-        df = df.append(merged)
-        
-        
-df.to_csv(r'C:\Users\vollm\scraping\UIDstesting1000.csv')
-
-#len(uids)
-for urls in range(len(uids)):
-    url = 'https://www.uid.admin.ch/Detail.aspx?uid_id='+uids.loc[urls][0]
-    page= requests.get(url)
-    soup = BeautifulSoup(page.text, 'html.parser')
-    fieldsets = soup.find_all('fieldset', class_='tab-content')
-    uid_div = soup.find_all('div', 'fieldsets')
-    sleep(randint(2,10))
-    
-       
+df.to_csv(r'C:\Users\vollm\Results.csv')
