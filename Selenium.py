@@ -3,6 +3,7 @@
 """
 
 @author: AV
+Method using Selenium and BeautifulSoup
 """
 import scrapy
 from bs4 import BeautifulSoup
@@ -18,8 +19,8 @@ import time
 from random import randint
 
    
-# Document for first 100 UIDs
-uids = pd.read_excel(r'S:\3_Hiwi\Vollmer\Scraping\List_of_UIDs_sorted.xlsx',sheet_name='Missing', index_col=None)
+# Document for UIDs
+uids = pd.read_excel(r'S:\3_Hiwi\Vollmer\Scraping\List_of_UIDs_sorted.xlsx', index_col=None)
 contents = []
 
 for urls in range(len(uids)):
@@ -87,6 +88,6 @@ df = pd.DataFrame(contents)
        
         
         
-df.to_csv(r'S:\3_Hiwi\Vollmer\Scraping\Results\Results1000.csv')
+df.to_csv(r'S:\3_Hiwi\Vollmer\Scraping\Results\Results.csv')
                 
   
